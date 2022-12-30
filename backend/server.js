@@ -1,7 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
 
+const userRoutes = require('./routes/users');
 const schoolRoutes = require('./routes/schools');
 const principalRoutes = require('./routes/principals');
 const teacherRoutes = require('./routes/teachers');
@@ -25,6 +27,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Mount the routes at specific paths
+app.use('/api/users', userRoutes);
 app.use('/api/schools', schoolRoutes);
 app.use('/api/principals', principalRoutes);
 app.use('/api/teachers', teacherRoutes);

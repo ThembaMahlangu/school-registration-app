@@ -1,44 +1,35 @@
 const express = require('express');
 const User = require('../models/user');
-const School = require('../models/school');
-const passport = require('passport');
 
 const router = express.Router();
 
 router.post('/register', (req, res) => {
-    const { name, password, role, school, parentCode, teacherCode, principalCode } = req.body;
-    const newUser = new User({ name, password, role, school, parentCode, teacherCode, principalCode });
-    User.register(newUser, password, (err) => {
-      if (err) {
-        res.send(err);
-      } else {
-        passport.authenticate('local')(req, res, () => {
-          res.send(req.user);
-        });
-      }
-    });
+  const { name, email, password, role, school, parentCode, teacherCode, principalCode } = req.body;
+  const newUser = new User({ name, email, password, role, school, parentCode, teacherCode, principalCode });
+  newUser.save((err) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(newUser);
+    }
   });
-  
-  router.post('/login', (req, res, next) => {
-    passport.authenticate('local', (err, user) => {
-      if (err) {
-        return next(err);
-      }
-      if (!user) {
-        return res.send({ success: false });
-      }
-      req.logIn(user, (error) => {
-        if (error) {
-          return next(error);
-        }
-        return res.send({ success: true, user });
-      });
-    })(req, res, next);
+});
+
+router.post('/login', (req, res) => {
+  const { email, password } = req.body;
+  User.findOne({ email, password }, (err, user) => {
+    if (err) {
+      res.send(err);
+    } else if (!user) {
+      res.send({ success: false });
+    } else {
+      res.send({ success: true, user });
+    }
   });
-  
-  router.get('/logout', (req, res) => {
-    req.logout();
-    res.send({ success: true });
-  });
-  
-  module.exports = router;
+});
+
+router.get('/logout', (req, res) => {
+  res.send({ success: true });
+});
+
+module.exports = router;
