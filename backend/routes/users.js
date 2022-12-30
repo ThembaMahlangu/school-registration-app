@@ -6,8 +6,8 @@ const passport = require('passport');
 const router = express.Router();
 
 router.post('/register', (req, res) => {
-    const { username, password, role, school } = req.body;
-    const newUser = new User({ username, password, role, school });
+    const { name, password, role, school, parentCode, teacherCode, principalCode } = req.body;
+    const newUser = new User({ name, password, role, school, parentCode, teacherCode, principalCode });
     User.register(newUser, password, (err) => {
       if (err) {
         res.send(err);
@@ -41,4 +41,4 @@ router.post('/register', (req, res) => {
     res.send({ success: true });
   });
   
-  module.exports = router;  
+  module.exports = router;
