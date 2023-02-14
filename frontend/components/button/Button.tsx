@@ -4,13 +4,17 @@ type ButtonProps = {
   label: string;
   action?: any;
   icon?: any;
+  radius?: string;
+  color?: string;
+  textColor?:string
 };
 
-const Button: FC<ButtonProps> = ({ label, action, icon }) => {
+const Button: FC<ButtonProps> = ({ label, action, icon, radius, color,textColor }) => {
   return (
     <button
       onClick={action}
-      className="cursor-pointer select-none rounded-sm border bg-purple-700 p-3 text-white transition-all"
+      style={{ borderRadius: radius, backgroundColor: color ,color:textColor}}
+      className="cursor-pointer select-none rounded-sm  p-3 text-white transition-all"
     >
       <span> {icon}</span>
       {label}

@@ -7,7 +7,7 @@ type pageProps = {
 const PageLayout: FC<pageProps> = ({ children }) => {
   return (
     <>
-      <div className="min-h-screen w-full border max-w-6xl mx-auto">
+      <div className="mx-auto  min-h-screen w-full ">
         {children}
       </div>
     </>
