@@ -1,3 +1,4 @@
+import PageLayout from "@/components/layout/PageLayout";
 import { AppProvider } from "@/context/app.context";
 import { UIProvider } from "@/context/ui.context";
 import "@/styles/globals.css";
@@ -7,7 +8,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <AppProvider>
       <UIProvider>
-        <Component {...pageProps} />
+        <PageLayout>
+          <Component {...pageProps} />
+        </PageLayout>
       </UIProvider>
     </AppProvider>
   );
