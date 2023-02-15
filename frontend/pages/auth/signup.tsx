@@ -18,12 +18,23 @@ const SignUp = () => {
   return (
     <>
       <div className="flex h-screen">
-        <div className="absolute left-10">
-          <Logo />
+        <div className=" hidden w-[50%]  md:block ">
+          <div className="absolute left-10">
+            <Logo />
+          </div>
+          <div className="h-full w-full ">
+            <Image
+              className=" h-[100%] w-full object-contain"
+              src="/assets/sign_up.png"
+              alt="login"
+              width={2000}
+              height={300}
+            />
+          </div>
         </div>
         <section className="flex flex-1 flex-col bg-[#2221]">
           <div className="lg-pr-20 flex  h-20 items-center justify-between px-6 md:pr-10">
-            <Link href="/" className="md:invisible">
+            <Link href="/" className="  md:invisible">
               <Logo />
             </Link>
             <Link href="/auth/login" className="">
@@ -79,17 +90,6 @@ const SignUp = () => {
             </div>
           </div>
         </section>
-        <div className=" hidden w-[50%]  md:block ">
-          <div className="h-full w-full ">
-            <Image
-              className=" h-[100%] w-full object-contain"
-              src="/assets/sign_up.png"
-              alt="login"
-              width={2000}
-              height={300}
-            />
-          </div>
-        </div>
       </div>
     </>
   );
