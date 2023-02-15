@@ -5,7 +5,7 @@ import MainLayout from "../layout/MainLayout";
 const MainView = () => {
   return (
     <>
-      <div className="flex-[40em] bg-[#BAE6FD]">
+      <div className="flex-[40em] max-h-[40em] bg-[#BAE6FD]">
         <MainLayout>
           <section className="flex lg:flex-row flex-col items-center justify-center">
             <div className="lg:w-[60%] px-2 w-[90%] pt-20">
