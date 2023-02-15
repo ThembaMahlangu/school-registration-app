@@ -13,7 +13,7 @@
 body {
   -ms-overflow-style: none;
   scrollbar-width: none;
-  @apply text-gray-700 dark:text-white;
+  /* @apply text-gray-700 dark:text-white; */
   /* @apply text-gray-700 dark:text-white bg-[#fafbff] dark:bg-[#181818]; */
 }
 

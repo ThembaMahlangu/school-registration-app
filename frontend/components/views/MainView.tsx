@@ -5,20 +5,20 @@ import MainLayout from "../layout/MainLayout";
 const MainView = () => {
   return (
     <>
-      <div className=" h-screen bg-[#BAE6FD]">
+      <div className="flex-[40em] bg-[#BAE6FD]">
         <MainLayout>
-          <section className="flex items-center justify-center">
-            <div className="w-[60%]">
-              <h1 className="text-5xl font-bold">
-                School management has never been easier, With Manage everything
-                get easier
+          <section className="flex lg:flex-row flex-col items-center justify-center">
+            <div className="lg:w-[60%] px-2 w-[90%] pt-20">
+              <h1 className="md:text-5xl text-3xl font-bold">
+                Elevate Your School&apos;s Performance with Manage: Simplify
+                Management, Build the Future!
               </h1>
               <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil
-                aut dolorem quibusdam veritatis ex iste hic provident inventore!
-                Eius, quos?
+                Manage simplifies school management, streamlines communication,
+                and elevates performance. Say goodbye to chaos and hello to a
+                better future with Manage.
               </p>
-              <div className="my-4 flex gap-8 ">
+              <div className="my-4 flex max-w-[500px] gap-8 flex-col md:flex-row ">
                 <Button
                   label="Get Started For Free"
                   radius="5px"

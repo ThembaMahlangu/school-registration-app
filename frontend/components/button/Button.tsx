@@ -14,7 +14,7 @@ const Button: FC<ButtonProps> = ({ label, action, icon, radius, color,textColor 
     <button
       onClick={action}
       style={{ borderRadius: radius, backgroundColor: color ,color:textColor}}
-      className="cursor-pointer select-none rounded-sm  p-3 text-white transition-all"
+      className="cursor-pointer select-none rounded-sm  p-3 text-white transition-all md:px-6"
     >
       <span> {icon}</span>
       {label}

@@ -7,7 +7,7 @@ type pageProps = {
 const PageLayout: FC<pageProps> = ({ children }) => {
   return (
     <>
-      <div className="mx-auto  min-h-screen w-full ">
+      <div className="mx-auto flex flex-1 flex-col min-h-screen w-full ">
         {children}
       </div>
     </>

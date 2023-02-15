@@ -4,11 +4,11 @@ const Logo = () => {
   return (
     <>
       <Image
-        src="/assets/logo/logo_light.png"
+        src="/assets/logo/logo_new.png"
         width={300}
         height={400}
         alt="logo"
-        className="h-20 w-[200px] object-cover"
+        className="h-20 w-[180px] object-cover"
       />
     </>
   );

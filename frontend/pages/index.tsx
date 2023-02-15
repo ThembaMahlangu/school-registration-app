@@ -1,13 +1,15 @@
+import Footer from "@/components/footer/Footer";
+import Header from "@/components/header";
 import BenefitsView from "@/components/views/BenefitsView";
 import MainView from "@/components/views/MainView";
-import Header from "@/components/header";
 
 export default function Home() {
   return (
     <>
       <Header />
       <MainView />
-      <BenefitsView />
+      {/* <BenefitsView /> */}
+      <Footer />
     </>
   );
 }
