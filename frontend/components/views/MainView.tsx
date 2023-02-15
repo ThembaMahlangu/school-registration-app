@@ -1,15 +1,16 @@
 import Image from "next/image";
 import Button from "../button/Button";
 import MainLayout from "../layout/MainLayout";
+import Link from "next/link";
 
 const MainView = () => {
   return (
     <>
       <div className=" bg-[#BAE6FD]">
         <MainLayout>
-          <section className="flex md:pb-24 lg:flex-row flex-col items-center justify-center">
-            <div className="lg:w-[60%] px-2 w-[90%] pt-20">
-              <h1 className="md:text-5xl text-3xl font-bold">
+          <section className="flex flex-col items-center justify-center md:pb-24 lg:flex-row">
+            <div className="w-[90%] px-2 pt-20 lg:w-[60%]">
+              <h1 className="text-3xl font-bold md:text-5xl">
                 Elevate Your School&apos;s Performance with Manage: Simplify
                 Management, Build the Future!
               </h1>
@@ -18,18 +19,22 @@ const MainView = () => {
                 and elevates performance. Say goodbye to chaos and hello to a
                 better future with Manage.
               </p>
-              <div className="my-4 flex max-w-[500px] gap-8 flex-col md:flex-row ">
-                <Button
-                  label="Get Started For Free"
-                  radius="5px"
-                  color="#7E22CE"
-                />
+              <div className="my-4 flex max-w-[500px] flex-col gap-8 md:flex-row ">
+                <Link href="/auth/login">
+                  <Button
+                    label="Get Started For Free"
+                    radius="5px"
+                    color="#7E22CE"
+                  />
+                </Link>
+                <Link href="/auth/signup">
                 <Button
                   label="Request A Demo"
                   radius="5px"
                   color="#2221"
                   textColor="#222"
                 />
+                </Link>
               </div>
             </div>
             <div className="">

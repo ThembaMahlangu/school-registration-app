@@ -5,7 +5,7 @@ type Props = {
 };
 
 const MainLayout: FC<Props> = ({ children }) => {
-  return <div className="max-w-6xl h-full mx-auto">{children}</div>;
+  return <div className="max-w-6xl flex-1 flex flex-col h-full w-full mx-auto">{children}</div>;
 };
 
 export default MainLayout;

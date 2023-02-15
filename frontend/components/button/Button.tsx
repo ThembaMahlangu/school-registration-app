@@ -6,15 +6,16 @@ type ButtonProps = {
   icon?: any;
   radius?: string;
   color?: string;
-  textColor?:string
+  textColor?:string;
+  width?:string
 };
 
-const Button: FC<ButtonProps> = ({ label, action, icon, radius, color,textColor }) => {
+const Button: FC<ButtonProps> = ({ label, action, icon, radius, color,textColor,width }) => {
   return (
     <button
       onClick={action}
-      style={{ borderRadius: radius, backgroundColor: color ,color:textColor}}
-      className="cursor-pointer select-none rounded-sm  p-3 text-white transition-all md:px-6"
+      style={{ borderRadius: radius, backgroundColor: color ,color:textColor,width:width}}
+      className="cursor-pointer select-none rounded-sm capitalize  p-3 text-white transition-all md:px-6"
     >
       <span> {icon}</span>
       {label}
