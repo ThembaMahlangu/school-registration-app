@@ -1,38 +1,22 @@
 import Button from "@/components/button/Button";
 import Input from "@/components/form/Input";
 import Logo from "@/components/logo/Logo";
+import { AppContext } from "@/context/app.context";
+import { IAppContextType } from "@/interfaces";
+import useLogin from "@/services/login.service";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import axios from "axios";
+import { useContext, useState } from "react";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const { loginForm, setLoginForm, controlLoginForm } =
+    useContext<IAppContextType | null>(AppContext) as IAppContextType;
+  const { isLoading, error, setErrorMsg, btn, errorMsg, verifyUser }=useLogin()
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-  
-    const target = event.target as typeof event.target & {
-      email: { value: string };
-      password: { value: string };
-    };
-  
-    const email = target.email.value;
-    const password = target.password.value;
-  
-    axios.post('http://localhost:8000/api/users/login', {
-      email,
-      password
-    })
-    .then((response) => {
-      localStorage.setItem('authToken', response.data.token);
-      console.log(response.data);
-      // redirect the user to dashboard page
-      window.location.href = '/dashboard';
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+    await verifyUser(loginForm)
+
   };
 
   return (
@@ -70,12 +54,21 @@ const Login = () => {
                 </h2>
               </div>
               <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
-                <Input placeholder="Email" name="email" label="Email" type="email" />
+                <Input
+                  placeholder="Email"
+                  name="email"
+                  value={loginForm.email}
+                  label="Email"
+                  type="email"
+                  onChange={controlLoginForm}
+                />
                 <Input
                   placeholder="password"
                   label="password"
                   name="password"
+                  value={loginForm.password}
                   type={showPassword ? "text" : "password"}
+                  onChange={controlLoginForm}
                 />
 
                 <div className="mb-1" />
@@ -90,8 +83,11 @@ const Login = () => {
                   />
                   <label htmlFor="password">View Password</label>
                 </div>
+                <div className=" text-medium text-center text-red-500">
+                  {errorMsg}
+                </div>
                 <Button
-                  label="LOGIN"
+                  label={btn}
                   radius="10px"
                   color="#7E22CE"
                   // textColor=""
@@ -107,3 +103,26 @@ const Login = () => {
 };
 
 export default Login;
+
+// const target = event.target as typeof event.target & {
+//   email: { value: string };
+//   password: { value: string };
+// };
+
+// const email = target.email.value;
+// const password = target.password.value;
+
+// axios
+//   .post("http://localhost:8000/api/users/login", {
+//     email,
+//     password,
+//   })
+//   .then((response) => {
+//     localStorage.setItem("authToken", response.data.token);
+//     console.log(response.data);
+//     // redirect the user to dashboard page
+//     window.location.href = "/dashboard";
+//   })
+//   .catch((error) => {
+//     console.error(error);
+//   });

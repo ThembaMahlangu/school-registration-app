@@ -19,6 +19,7 @@ export interface IAppContextType {
   signUpForm: registerProps;
   setSignUpForm: React.Dispatch<SetStateAction<registerProps>>;
   controlSignUpForm:any
+  controlLoginForm:any
 }
 export interface IUIContextType {
   //   tone: string;

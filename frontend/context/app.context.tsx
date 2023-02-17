@@ -40,7 +40,16 @@ export const AppProvider: FC<AppProps> = ({ children }) => {
       [name]: value,
     }));
   };
+    const controlLoginForm = (event: any) => {
+      const { name, value } = event.target;
 
+      setLoginForm((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    };
+
+    console.log(loginForm)
   return (
     <AppContext.Provider
       value={{
@@ -49,6 +58,7 @@ export const AppProvider: FC<AppProps> = ({ children }) => {
         setLoginForm,
         setSignUpForm,
         controlSignUpForm,
+        controlLoginForm,
       }}
     >
       {children}
