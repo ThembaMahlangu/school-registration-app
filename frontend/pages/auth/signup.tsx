@@ -4,16 +4,50 @@ import Logo from "@/components/logo/Logo";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import axios from 'axios';
 
 const SignUp = () => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+  
+    const target = event.target as typeof event.target & {
+      name: { value: string };
+      organization: { value: string };
+      email: { value: string };
+      password: { value: string };
+      confirmpassword: { value: string };
+    };
+  
+    const name = target.name.value;
+    const organization = target.organization.value;
+    const email = target.email.value;
+    const password = target.password.value;
+    const confirmPassword = target.confirmpassword.value;
+  
+    axios.post('http://localhost:8000/api/users/register', {
+      name,
+      organization,
+      email,
+      password,
+      confirmPassword
+    })
+    .then((response) => {
+      console.log(response.data);
+      // redirect the user to login page
+      window.location.href = '/auth/login';
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  };
+  
+  
+
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const styles = {
     glass: `bg-clip-padding backdrop-filter backdrop-blur-2xl
      bg-gray-200 bg-opacity-30 "
     }`,
-  };
-  const handleSubmit = () => {
-    console.log("submitted");
   };
   return (
     <>
@@ -49,8 +83,9 @@ const SignUp = () => {
                 </h2>
               </div>
               <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
-                <Input placeholder="Name Of Department" label="Name of Department" type="text" />
-                <Input placeholder="Email" label="Email" type="email" />
+              <Input name="name" placeholder="Name" label="Full Name" type="text" />
+                <Input name="organization" placeholder="Name Of Organization/Department" label="Name of Organization/Department" type="text" />
+                <Input name="email" placeholder="Email" label="Email" type="email" />
                 <Input
                   placeholder="password"
                   label="password"
@@ -60,7 +95,7 @@ const SignUp = () => {
                 <Input
                   placeholder="confirm password"
                   label="Confirm password"
-                  name="password"
+                  name="confirmpassword"
                   type={showPassword ? "text" : "password"}
                 />
 
@@ -68,7 +103,6 @@ const SignUp = () => {
                 <div className="flex gap-2">
                   <input
                     type="checkbox"
-                    name="password"
                     onChange={() => {
                       setShowPassword((prev) => !prev);
                     }}

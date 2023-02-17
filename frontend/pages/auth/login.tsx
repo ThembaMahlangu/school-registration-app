@@ -4,14 +4,37 @@ import Logo from "@/components/logo/Logo";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import axios from "axios";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("submitted");
+  
+    const target = event.target as typeof event.target & {
+      email: { value: string };
+      password: { value: string };
+    };
+  
+    const email = target.email.value;
+    const password = target.password.value;
+  
+    axios.post('http://localhost:8000/api/users/login', {
+      email,
+      password
+    })
+    .then((response) => {
+      localStorage.setItem('authToken', response.data.token);
+      console.log(response.data);
+      // redirect the user to dashboard page
+      window.location.href = '/dashboard';
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   };
+
   return (
     <>
       <div className="flex h-screen">
