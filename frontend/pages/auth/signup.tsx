@@ -19,9 +19,9 @@ const SignUp = () => {
     <>
       <div className="flex h-screen">
         <div className=" hidden w-[50%]  md:block ">
-          <div className="absolute left-10">
+          <Link href="/" className="absolute left-10">
             <Logo />
-          </div>
+          </Link>
           <div className="h-full w-full ">
             <Image
               className=" h-[100%] w-full object-contain"
@@ -42,28 +42,25 @@ const SignUp = () => {
             </Link>
           </div>
           <div className="flex flex-1 flex-col items-center justify-center ">
-            <div className="flex   w-full flex-col   rounded-md  border-gray-700 p-6 sm:w-[90%] lg:w-[30em]">
+            <div className="flex   w-full flex-col   rounded-md  border-gray-700 px-6 sm:w-[90%] lg:w-[30em]">
               <div className="">
                 <h2 className="pb-4 text-2xl font-medium capitalize text-purple-700">
                   Sign up to continue
                 </h2>
               </div>
               <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
-                <Input
-                  placeholder="Full name"
-                  name="name"
-                  label="Full Name"
-                  type="text"
-                />
+                <Input placeholder="Name Of Department" label="Name of Department" type="text" />
                 <Input placeholder="Email" label="Email" type="email" />
                 <Input
                   placeholder="password"
                   label="password"
+                  name="password"
                   type={showPassword ? "text" : "password"}
                 />
                 <Input
                   placeholder="confirm password"
                   label="Confirm password"
+                  name="password"
                   type={showPassword ? "text" : "password"}
                 />
 

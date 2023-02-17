@@ -15,10 +15,10 @@ const Login = () => {
   return (
     <>
       <div className="flex h-screen">
-        <div className=" w-[50%] hidden md:block ">
-          <div className="absolute left-10">
+        <div className=" hidden w-[50%] md:block ">
+          <Link href="/" className="absolute left-10">
             <Logo />
-          </div>
+          </Link>
           <div className="h-full w-full ">
             <Image
               className=" h-[100%] w-full object-contain"
@@ -28,31 +28,30 @@ const Login = () => {
               height={300}
             />
           </div>
-          <div>
-            
-          </div>
+          <div></div>
         </div>
         <section className="flex flex-1 flex-col bg-[#2221]">
-          <div className="flex h-20  items-center justify-between px-6 md:pr-10 lg-pr-20">
+          <div className="lg-pr-20 flex  h-20 items-center justify-between px-6 md:pr-10">
             <Link href="/" className="md:invisible">
-              <Logo/>
+              <Logo />
             </Link>
             <Link href="/auth/signup" className="">
               <Button radius="10px" label="Sign up" color="#7E22CE" />
             </Link>
           </div>
           <div className="flex flex-1 flex-col items-center justify-center ">
-            <div className="flex   sm:w-[90%] w-full   lg:w-[30em]  flex-col rounded-md border-gray-700 p-6">
+            <div className="flex   w-full flex-col   rounded-md  border-gray-700 p-6 sm:w-[90%] lg:w-[30em]">
               <div className="">
                 <h2 className="pb-4 text-2xl font-medium capitalize text-purple-700">
                   login to continue
                 </h2>
               </div>
               <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
-                <Input placeholder="Email" label="Email" type="email" />
+                <Input placeholder="Email" name="email" label="Email" type="email" />
                 <Input
                   placeholder="password"
                   label="password"
+                  name="password"
                   type={showPassword ? "text" : "password"}
                 />
 
