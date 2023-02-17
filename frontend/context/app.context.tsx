@@ -7,29 +7,39 @@ type AppProps = {
   children: ReactNode;
 };
 
-type loginProps = {
-  email: string;
-  password: string;
-};
-type registerProps = {
-  deptName: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
+// type loginProps = {
+//   email: string;
+//   password: string;
+// };
+// type registerProps = {
+//   deptName: string;
+//   email: string;
+//   password: string;
+//   confirmPassword: string;
+// };
 
 export const AppProvider: FC<AppProps> = ({ children }) => {
-  const [loginForm, setLoginForm] = useState<loginProps>({
+  const [loginForm, setLoginForm] = useState({
     email: "",
-    password:"",
+    password: "",
   });
 
-  const [signUpForm, setSignUpForm] = useState<registerProps>({
-    deptName: "",
+  const [signUpForm, setSignUpForm] = useState({
+    name: "",
+    organization: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+
+  const controlSignUpForm = (event: any) => {
+    const { name, value } = event.target;
+
+    setSignUpForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   return (
     <AppContext.Provider
@@ -38,6 +48,7 @@ export const AppProvider: FC<AppProps> = ({ children }) => {
         signUpForm,
         setLoginForm,
         setSignUpForm,
+        controlSignUpForm,
       }}
     >
       {children}

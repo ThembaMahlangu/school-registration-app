@@ -1,54 +1,29 @@
 import Button from "@/components/button/Button";
 import Input from "@/components/form/Input";
 import Logo from "@/components/logo/Logo";
+import { AppContext } from "@/context/app.context";
+import { IAppContextType } from "@/interfaces";
+import useSignUp from "@/services/signup.service";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import axios from 'axios';
+import { useContext, useState } from "react";
 
 const SignUp = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-  
-    const target = event.target as typeof event.target & {
-      name: { value: string };
-      organization: { value: string };
-      email: { value: string };
-      password: { value: string };
-      confirmpassword: { value: string };
-    };
-  
-    const name = target.name.value;
-    const organization = target.organization.value;
-    const email = target.email.value;
-    const password = target.password.value;
-    const confirmPassword = target.confirmpassword.value;
-  
-    axios.post('http://localhost:8000/api/users/register', {
-      name,
-      organization,
-      email,
-      password,
-      confirmPassword
-    })
-    .then((response) => {
-      console.log(response.data);
-      // redirect the user to login page
-      window.location.href = '/auth/login';
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-  };
-  
-  
 
+
+  const { signUpForm, setSignUpForm ,controlSignUpForm} = useContext<IAppContextType | null>(AppContext) as IAppContextType;
+  const { isLoading, error, setErrorMsg, btn, errorMsg, uploadSignUpData }=useSignUp()
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const styles = {
     glass: `bg-clip-padding backdrop-filter backdrop-blur-2xl
      bg-gray-200 bg-opacity-30 "
     }`,
   };
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      console.log(signUpForm);
+      await uploadSignUpData(signUpForm)
+    };
   return (
     <>
       <div className="flex h-screen">
@@ -83,20 +58,45 @@ const SignUp = () => {
                 </h2>
               </div>
               <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
-              <Input name="name" placeholder="Name" label="Full Name" type="text" />
-                <Input name="organization" placeholder="Name Of Organization/Department" label="Name of Organization/Department" type="text" />
-                <Input name="email" placeholder="Email" label="Email" type="email" />
+                <Input
+                  name="name"
+                  placeholder="Name"
+                  label="Full Name"
+                  type="text"
+                  value={signUpForm.name}
+                  onChange={controlSignUpForm}
+                />
+                <Input
+                  name="organization"
+                  placeholder="Name Of Organization/Department"
+                  label="Name of Organization/Department"
+                  type="text"
+                  value={signUpForm.organization}
+                  onChange={controlSignUpForm}
+                />
+                <Input
+                  name="email"
+                  placeholder="Email"
+                  label="Email"
+                  type="email"
+                  value={signUpForm.email}
+                  onChange={controlSignUpForm}
+                />
                 <Input
                   placeholder="password"
                   label="password"
                   name="password"
                   type={showPassword ? "text" : "password"}
+                  value={signUpForm.password}
+                  onChange={controlSignUpForm}
                 />
                 <Input
                   placeholder="confirm password"
                   label="Confirm password"
-                  name="confirmpassword"
+                  name="confirmPassword"
                   type={showPassword ? "text" : "password"}
+                  value={signUpForm.confirmPassword}
+                  onChange={controlSignUpForm}
                 />
 
                 <div className="mb-1" />
@@ -110,8 +110,11 @@ const SignUp = () => {
                   />
                   <label htmlFor="password">View Password</label>
                 </div>
+                <div className=" text-medium text-center text-red-500">
+                  {errorMsg}
+                </div>
                 <Button
-                  label="SIGNUP"
+                  label={btn}
                   radius="10px"
                   color="#7E22CE"
                   // textColor=""
@@ -127,3 +130,4 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
