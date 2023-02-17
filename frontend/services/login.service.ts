@@ -1,7 +1,9 @@
+import { AppContext } from "@/context/app.context";
+import { IAppContextType } from "@/interfaces";
 import { loginProps } from "@/props";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 const useLogin = () => {
@@ -9,7 +11,9 @@ const useLogin = () => {
   const [error, setError] = useState<any>(false);
   const [errorMsg, setErrorMsg] = useState<string>("");
   const [btn, setBtn] = useState<string>("LOGIN");
-  //   const { setUserData } = useContext(AppContext);
+  const { setUserData } = useContext<IAppContextType | null>(
+    AppContext,
+  ) as IAppContextType;
 
   const router = useRouter();
   useEffect(() => {
@@ -24,11 +28,22 @@ const useLogin = () => {
         `http://localhost:8000/api/users/login`,
         data,
       );
-      console.log(response.data)
-      sessionStorage.setItem("userInfo", JSON.stringify(response.data.user));
-      //   setUserData(response.data.user);
-      sessionStorage.setItem("loggedIn", "true");
-      router.push("/dash");
+      const userInfo = await axios.get(
+        `http://localhost:8000/api/users/${response.data.userId}`,
+      );
+      if (userInfo?.data) {
+        setUserData(userInfo?.data);
+        console.log(userInfo?.data)
+        console.log("user is active");
+        sessionStorage.setItem("loggedIn", "true");
+        sessionStorage.setItem("userId", response.data.userId);
+        sessionStorage.setItem("token", response.data.token);
+        sessionStorage.setItem("userInfo", JSON.stringify(userInfo?.data));
+        router.push("/dash");
+      } else {
+        console.log("user is not active");
+        sessionStorage.setItem("loggedIn", "false");
+      }
     } catch (error: any) {
       setError(true);
       console.log(error);

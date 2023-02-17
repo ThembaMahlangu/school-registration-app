@@ -1,5 +1,5 @@
-import { ChangeEvent, SetStateAction } from "react";
-import { registerProps,loginProps } from "@/props";
+import { loginProps, registerProps, userProps } from "@/props";
+import { SetStateAction } from "react";
 
 // type loginProps = {
 //   email: string;
@@ -18,8 +18,10 @@ export interface IAppContextType {
   setLoginForm: React.Dispatch<SetStateAction<loginProps>>;
   signUpForm: registerProps;
   setSignUpForm: React.Dispatch<SetStateAction<registerProps>>;
-  controlSignUpForm:any
-  controlLoginForm:any
+  controlSignUpForm: any;
+  controlLoginForm: any;
+  userData: userProps;
+  setUserData: React.Dispatch<SetStateAction<userProps>>;
 }
 export interface IUIContextType {
   //   tone: string;

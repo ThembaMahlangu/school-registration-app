@@ -1,7 +1,9 @@
+import { AppContext } from "@/context/app.context";
+import { IAppContextType } from "@/interfaces";
 import { registerProps } from "@/props";
-import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 const useSignUp = () => {
@@ -9,7 +11,9 @@ const useSignUp = () => {
   const [error, setError] = useState<any>(false);
   const [errorMsg, setErrorMsg] = useState<string>("");
   const [btn, setBtn] = useState<string>("SIGNUP");
-  //   const { setUserData } = useContext(AppContext);
+  const { setUserData } = useContext<IAppContextType | null>(
+    AppContext,
+  ) as IAppContextType;
 
   const router = useRouter();
   useEffect(() => {
@@ -24,8 +28,9 @@ const useSignUp = () => {
         `http://localhost:8000/api/users/register`,
         data,
       );
+      console.log(response.data.user);
       sessionStorage.setItem("userInfo", JSON.stringify(response.data.user));
-      //   setUserData(response.data.user);
+      setUserData(response.data.user);
       sessionStorage.setItem("loggedIn", "true");
       router.push("/auth/login");
     } catch (error: any) {
@@ -37,7 +42,6 @@ const useSignUp = () => {
       if (error?.response?.data?.message) {
         setErrorMsg(error?.response?.data?.message);
         toast.error(error?.response?.data?.message);
-
       } else if (error?.response?.data?.errors[0]) {
         setErrorMsg(error?.response?.data?.errors[0].msg);
         toast.error(error?.response?.data?.errors[0].msg);

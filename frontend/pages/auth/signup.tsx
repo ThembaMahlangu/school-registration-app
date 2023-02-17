@@ -9,21 +9,17 @@ import Link from "next/link";
 import { useContext, useState } from "react";
 
 const SignUp = () => {
-
-
-  const { signUpForm, setSignUpForm ,controlSignUpForm} = useContext<IAppContextType | null>(AppContext) as IAppContextType;
-  const { isLoading, error, setErrorMsg, btn, errorMsg, uploadSignUpData }=useSignUp()
+  const { signUpForm, controlSignUpForm } = useContext<IAppContextType | null>(
+    AppContext,
+  ) as IAppContextType;
+  const { btn, errorMsg, uploadSignUpData } = useSignUp();
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const styles = {
-    glass: `bg-clip-padding backdrop-filter backdrop-blur-2xl
-     bg-gray-200 bg-opacity-30 "
-    }`,
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(signUpForm);
+    await uploadSignUpData(signUpForm);
   };
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      console.log(signUpForm);
-      await uploadSignUpData(signUpForm)
-    };
   return (
     <>
       <div className="flex h-screen">
@@ -117,7 +113,6 @@ const SignUp = () => {
                   label={btn}
                   radius="10px"
                   color="#7E22CE"
-                  // textColor=""
                   width="100%"
                 />
               </form>
@@ -130,4 +125,3 @@ const SignUp = () => {
 };
 
 export default SignUp;
-

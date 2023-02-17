@@ -8,17 +8,27 @@ type AppProps = {
 };
 
 // type loginProps = {
-//   email: string;
-//   password: string;
+//   email:"",
+//   password:"",
 // };
 // type registerProps = {
-//   deptName: string;
-//   email: string;
-//   password: string;
-//   confirmPassword: string;
+//   deptName:"",
+//   email:"",
+//   password:"",
+//   confirmPassword:"",
 // };
 
 export const AppProvider: FC<AppProps> = ({ children }) => {
+  const [userData, setUserData] = useState({
+    createdAt: "",
+    email: "",
+    name: "",
+    organization: "",
+    password: "",
+    updatedAt: "",
+    __v: null,
+    _id: "",
+  });
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
@@ -40,16 +50,15 @@ export const AppProvider: FC<AppProps> = ({ children }) => {
       [name]: value,
     }));
   };
-    const controlLoginForm = (event: any) => {
-      const { name, value } = event.target;
+  const controlLoginForm = (event: any) => {
+    const { name, value } = event.target;
 
-      setLoginForm((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    };
+    setLoginForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-    console.log(loginForm)
   return (
     <AppContext.Provider
       value={{
@@ -59,6 +68,8 @@ export const AppProvider: FC<AppProps> = ({ children }) => {
         setSignUpForm,
         controlSignUpForm,
         controlLoginForm,
+        userData,
+        setUserData,
       }}
     >
       {children}

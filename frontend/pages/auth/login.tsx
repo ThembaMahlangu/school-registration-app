@@ -10,13 +10,13 @@ import { useContext, useState } from "react";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { loginForm, setLoginForm, controlLoginForm } =
-    useContext<IAppContextType | null>(AppContext) as IAppContextType;
-  const { isLoading, error, setErrorMsg, btn, errorMsg, verifyUser }=useLogin()
+  const { loginForm, controlLoginForm } = useContext<IAppContextType | null>(
+    AppContext,
+  ) as IAppContextType;
+  const { btn, errorMsg, verifyUser } = useLogin();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await verifyUser(loginForm)
-
+    await verifyUser(loginForm);
   };
 
   return (
@@ -90,7 +90,6 @@ const Login = () => {
                   label={btn}
                   radius="10px"
                   color="#7E22CE"
-                  // textColor=""
                   width="100%"
                 />
               </form>
@@ -103,26 +102,3 @@ const Login = () => {
 };
 
 export default Login;
-
-// const target = event.target as typeof event.target & {
-//   email: { value: string };
-//   password: { value: string };
-// };
-
-// const email = target.email.value;
-// const password = target.password.value;
-
-// axios
-//   .post("http://localhost:8000/api/users/login", {
-//     email,
-//     password,
-//   })
-//   .then((response) => {
-//     localStorage.setItem("authToken", response.data.token);
-//     console.log(response.data);
-//     // redirect the user to dashboard page
-//     window.location.href = "/dashboard";
-//   })
-//   .catch((error) => {
-//     console.error(error);
-//   });
