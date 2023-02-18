@@ -1,18 +1,6 @@
 import { loginProps, registerProps, userProps } from "@/props";
 import { SetStateAction } from "react";
 
-// type loginProps = {
-//   email: string;
-//   password: string;
-// };
-// type registerProps = {
-//   name: string;
-//   organization: string;
-//   email: string;
-//   password: string;
-//   confirmation: string;
-// };
-
 export interface IAppContextType {
   loginForm: loginProps;
   setLoginForm: React.Dispatch<SetStateAction<loginProps>>;

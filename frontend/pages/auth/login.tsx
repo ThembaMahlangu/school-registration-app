@@ -26,7 +26,7 @@ const Login = () => {
           <Link href="/" className="absolute left-10">
             <Logo />
           </Link>
-          <div className="h-full w-full ">
+          <div className="h-full w-full">
             <Image
               className=" h-[100%] w-full object-contain"
               src="/assets/login.png"
