@@ -25,7 +25,7 @@ const useSignUp = () => {
     setError(false);
     try {
       const response = await axios.post(
-        `http://localhost:8000/api/users/register`,
+        `https://school-registration.onrender.com/api/users/register`,
         data,
       );
       console.log(response.data.user);

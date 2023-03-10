@@ -25,11 +25,11 @@ const useLogin = () => {
     setError(false);
     try {
       const response = await axios.post(
-        `http://localhost:8000/api/users/login`,
+        `https://school-registration.onrender.com/api/users/login`,
         data,
       );
       const userInfo = await axios.get(
-        `http://localhost:8000/api/users/${response.data.userId}`,
+        `https://school-registration.onrender.com/api/users/${response.data.userId}`,
       );
       if (userInfo?.data) {
         setUserData(userInfo?.data);
