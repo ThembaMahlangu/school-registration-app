@@ -14,9 +14,9 @@ const Footer = () => {
           <section className={"flex flex-col"}>
             <div className="flex-1">
               <h3 className="text-xl font-medium uppercase tracking-wider text-purple-700">
-                edulinkage
+                asyncfam
               </h3>
-              <p className="my-4">Manage is a product of Edulinkage</p>
+              <p className="my-4">Manage is a product of AsyncFam</p>
               <div className="flex gap-6 pb-4">
                 <FaInstagram size={28} />
                 <FaTwitter size={28} />
@@ -24,7 +24,7 @@ const Footer = () => {
                 <FaFacebookSquare size={28} />
               </div>
             </div>
-            <p className="">info@edulinkage.com</p>
+            <p className="">manage@asyncfam.co.za</p>
           </section>
           <section className="flex flex-col">
             <h3 className="text-xl font-medium uppercase tracking-wider text-purple-700">
@@ -60,7 +60,7 @@ const Footer = () => {
           </span>
           <span>
             Powered By{" "}
-            <span className="uppercase text-purple-700">edulinkage</span>
+            <span className="uppercase text-purple-700">AsyncFam</span>
           </span>
         </div>
       </footer>

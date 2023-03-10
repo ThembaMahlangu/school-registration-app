@@ -7,6 +7,6 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cSpell.words": ["EDULINKAGE"],
+  "cSpell.words": ["ASYNCFAM"],
   "deepscan.enable": true
 }
