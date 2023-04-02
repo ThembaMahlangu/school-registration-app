@@ -27,7 +27,7 @@ const Dash = () => {
       HotToast.error("Please fill all fields");
     } else {
       axios
-        .post("https://server.edulinkage.co.za:8000/api/schools", schoolForm)
+        .post("https://manage-server.onrender.com/api/schools", schoolForm)
         .then((response) => {
           HotToast.success("School has been submitted");
           setSchoolForm({
